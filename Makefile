@@ -1,4 +1,4 @@
-BACKUP_FROM=.
+BACKUP_FROM=../"to be backuped"
 BACKUP_TO=../backup
 FREQUENCY=10
 MAX=3

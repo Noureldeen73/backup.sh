@@ -14,9 +14,9 @@ if [ ${#DIRECTORIES[@]} -eq 0 ]; then
     exit 0
 fi
 
-# Start at the latest backup (index 0)
 INDEX=0
-rsync -a --delete "${DIRECTORIES[INDEX]}/" "$SOURCE_DIR/"
+rm -rf "$SOURCE_DIR"/*
+cp -r "${DIRECTORIES[INDEX]}"/* "$SOURCE_DIR"
 echo "Last backup has been restored."
 
 while true; do
@@ -31,7 +31,8 @@ while true; do
         1)  
 		if [ $INDEX -lt $((${#DIRECTORIES[@]} - 1)) ]; then
                 INDEX=$((INDEX+1))
-                rsync -a --delete "${DIRECTORIES[INDEX]}/" "$SOURCE_DIR/"
+                rm -rf "$SOURCE_DIR"/*
+		cp -r "${DIRECTORIES[INDEX]}"/* "$SOURCE_DIR"
 		echo "Restored to the most recent prior backup: ${DIRECTORIES[INDEX]}"
             else
                 echo "No older backup available to restore."
@@ -40,7 +41,8 @@ while true; do
         2)  
             if [ $INDEX -gt 0 ]; then
                 INDEX=$((INDEX-1))
-                rsync -a --delete "${DIRECTORIES[INDEX]}/" "$SOURCE_DIR/"
+                rm -rf "$SOURCE_DIR"/*
+		cp -r "${DIRECTORIES[INDEX]}"/* "$SOURCE_DIR"
                 echo "Restored to the next available version: ${DIRECTORIES[INDEX]}"
             else
                 echo "No newer backup available to restore."
