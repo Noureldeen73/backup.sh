@@ -1,7 +1,8 @@
-BACKUP_FROM=../"to be backuped"
-BACKUP_TO=../backup
-FREQUENCY=10
-MAX=3
+BACKUP_FROM=../"to be backuped"                 #Backup source folder
+BACKUP_TO=../backup                             #Backup destination folder
+FREQUENCY=10                                    #Checking interval in seconds
+MAX=3                                           #Max backups
+
 
 run_backup: create_backup_dir
 	@echo "Running backup script..."
